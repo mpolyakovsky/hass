@@ -1,0 +1,63 @@
+# Weather current
+- platform: yr
+  monitored_conditions:
+    - symbol
+
+# Moon sensor
+- platform: moon
+
+# A1 sensors
+- platform: broadlink
+  host: 192.168.0.95
+  mac: '34:ea:34:e4:8c:69'
+  monitored_conditions:
+    - temperature
+    - humidity
+    - light
+
+# Time sensor
+- platform: time_date
+  display_options:
+    - 'time'
+
+- platform: uptime
+  name: Time Online
+  unit_of_measurement: days
+
+- platform: systemmonitor
+  resources:
+    - type: memory_use_percent
+    - type: swap_use_percent
+    - type: processor_use
+    - type: last_boot
+
+- platform: command_line
+  name: CPU Temp
+  command: "cat /sys/class/thermal/thermal_zone0/temp"
+  unit_of_measurement: "°C"
+  value_template: '{{ value | multiply(0.001) | round(1) }}'
+
+- platform: rest
+  name: usd_byn_rate
+  resource: http://www.nbrb.by/API/ExRates/Rates/USD?ParamMode=2
+  unit_of_measurement: BYN
+  json_attributes:
+    - Cur_OfficialRate
+  value_template: '{{ value_json.Cur_OfficialRate }}'
+
+# Yandex transport
+- platform: yandex_transport
+  name: next to metro
+  stop_id: 10045436
+
+- platform: yandex_transport
+  name: next 8
+  stop_id: 10045432
+  routes:
+    - 8
+
+- platform: yandex_transport
+  name: next 42
+  stop_id: 10045432
+  routes:
+    - 42

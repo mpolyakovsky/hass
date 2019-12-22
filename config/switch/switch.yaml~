@@ -1,0 +1,21 @@
+# MQTT Sonoff switches =====================================================================================
+
+# Sonoff (room garland)
+  - platform: mqtt
+    name: 'Room garland'
+    command_topic: 'cmnd/sonoff_wire_02/power'
+    state_topic: 'stat/sonoff_wire_02/POWER'
+    qos: 1
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    retain: true
+
+# Sonoff (room table lamp)
+  - platform: mqtt
+    name: 'Table lamp'
+    command_topic: 'cmnd/sonoff_wire_01/power'
+    state_topic: 'stat/sonoff_wire_01/POWER'
+    qos: 1
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    retain: true

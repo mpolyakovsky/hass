@@ -1,0 +1,20 @@
+# Wake up in the morning
+- alias: Wake up
+  initial_state: true
+  trigger:
+    platform: template
+    value_template: "{{ states.sensor.time.state == states.sensor.alarm_clock_time.state }}"
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.alarm_clock_status
+        state: 'on'
+      - condition: state
+        entity_id: binary_sensor.workday_sensor
+        state: 'on'
+      - condition: state
+        entity_id: binary_sensor.someone_is_home
+        state: 'on'
+  action:
+    service: script.wake_up

@@ -1,0 +1,42 @@
+  main_door:
+    name: Door is opened
+    title: '*Door sensor*'
+    message: Please CLOSE the door, it's still opened!
+    entity_id: binary_sensor.door_is_open_more_than_2_minutes
+    repeat: 3
+    can_acknowledge: true
+    notifiers:
+      - telegram_bot
+
+  humidifier_no_water:
+    name: Humidifier run out of water
+    title: '*Humidifier*'
+    message: My water tank has run out of water, please refill!
+    done_message: Water tank has been refilled, thanks!
+    entity_id: binary_sensor.humidifier_water_tank_empty
+    repeat: 60
+    can_acknowledge: true
+    notifiers:
+      - telegram_bot
+
+  humidifier_manual_switch_off:
+    name: Humidifier manual switch is off
+    title: '*Humidifier*'
+    message: Please turn on the manual switch!
+    done_message: Switch is on, thanks!
+    entity_id: binary_sensor.humidifier_manual_switch_off
+    repeat: 180
+    can_acknowledge: true
+    notifiers:
+      - telegram_bot
+
+  lena_laptop_on_when_lena_not_home:
+    name: Laptop has been turned ON
+    title: '*Lena laptop*'
+    message: Laptop is ON while Lena is not home.
+    done_message: Laptop has been turned OFF or Lena arrived home.
+    entity_id: binary_sensor.lena_laptop_on_while_lena_away
+    repeat: 30
+    can_acknowledge: true
+    notifiers:
+      - telegram_bot

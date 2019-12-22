@@ -1,0 +1,59 @@
+- alias: 'Telegram ac'
+  initial_state: true
+  trigger:
+    platform: event
+    event_type: telegram_command
+    event_data:
+      command: '/ac'
+  action:
+    - service: telegram_bot.send_message
+      data_template:
+        title: '*Air Conditioner*'
+        target: '{{ trigger.event.data.user_id }}'
+        message: 'Yes, master?'
+        disable_notification: true
+        inline_keyboard:
+          - "Cool low:/ac_cool_low, Cool Max:/ac_cool_max, Turn off:/ac_off"
+          - "Cancel:/remove_message"
+
+- alias: 'Telegram ac cooling on low'
+  initial_state: true
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: '/ac_cool_low'
+  action:
+    - service: notify.telegram_bot
+      data:
+        message: 'OK, turning on AC cooling in low mode!'
+    - service: script.turn_on
+      entity_id: script.ac_cool_low
+
+- alias: 'Telegram ac cooling on max'
+  initial_state: true
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: '/ac_cool_max'
+  action:
+    - service: notify.telegram_bot
+      data:
+        message: 'OK, turning on AC cooling in max mode!'
+    - service: script.turn_on
+      entity_id: script.ac_cool_highest
+
+- alias: 'Telegram ac turn off'
+  initial_state: true
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: '/ac_off'
+  action:
+    - service: notify.telegram_bot
+      data:
+        message: 'OK, turning off the AC!'
+    - service: climate.turn_off
+      entity_id: climate.mitsubishi_ac

@@ -1,0 +1,65 @@
+# Humidifier turn ON by schedule
+- alias: Humidifier auto ON after lunch
+  initial_state: true
+  trigger:
+    platform: time
+    at: '12:30:00'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: binary_sensor.workday_sensor
+        state: 'on'
+      - condition: numeric_state
+        entity_id: sensor.broadlink_sensor_humidity
+        below: 45
+  action:
+    - service: switch.turn_on
+      entity_id: switch.bw_humidifier
+    - service: homeassistant.turn_on
+      entity_id: automation.humidifier_auto_on
+
+ # Humidifier turn OFF by schedule
+- alias: Humidifier auto OFF in the morning
+  initial_state: true
+  trigger:
+    platform: time
+    at: '08:00:00'
+  condition:
+    - condition: and
+      conditions:
+      - condition: state
+        entity_id: binary_sensor.workday_sensor
+        state: 'on'
+      - condition: state
+        entity_id: binary_sensor.nobody_is_home
+        state: 'on'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.bw_humidifier
+    - service: homeassistant.turn_off
+      entity_id: automation.humidifier_auto_on
+
+- alias: Humidifier auto ON
+  initial_state: true
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.broadlink_sensor_humidity
+    below: 45
+    for:
+      minutes: 20
+  action:
+    - service: switch.turn_on
+      entity_id: switch.bw_humidifier
+
+- alias: Humidifier auto OFF
+  initial_state: true
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.broadlink_sensor_humidity
+    above: 53
+    for:
+      minutes: 30
+  action:
+    - service: switch.turn_off
+      entity_id: switch.bw_humidifier

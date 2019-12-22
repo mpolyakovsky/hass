@@ -1,0 +1,71 @@
+# MQTT Sonoff switches =====================================================================================
+
+# Sonoff (room garland)
+  - platform: mqtt
+    name: 'Room garland'
+    command_topic: 'cmnd/sonoff_wire_02/power'
+    state_topic: 'stat/sonoff_wire_02/POWER'
+    qos: 0
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    retain: false
+
+# Sonoff (room table lamp)
+  - platform: mqtt
+    name: 'Table lamp'
+    command_topic: 'cmnd/sonoff_wire_01/power'
+    state_topic: 'stat/sonoff_wire_01/POWER'
+    qos: 1
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    retain: true
+
+# Sonoff (temp 03)
+  - platform: mqtt
+    name: 'Sonoff (temp 03)'
+    command_topic: 'cmnd/sonoff_wire_03/power'
+    state_topic: 'stat/sonoff_wire_03/POWER'
+    qos: 1
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    retain: true
+
+# Sonoff (temp 04)
+  - platform: mqtt
+    name: 'Sonoff (temp 04)'
+    command_topic: 'cmnd/sonoff_wire_04/power'
+    state_topic: 'stat/sonoff_wire_04/POWER'
+    qos: 1
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    retain: true
+
+# Sonoff (temp 05)
+  - platform: mqtt
+    name: 'Uta table lamp'
+    command_topic: 'cmnd/sonoff_room_uta_01/power'
+    state_topic: 'stat/sonoff_room_uta_01/POWER'
+    qos: 1
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    retain: true
+
+# Sonoff (temp 06)
+  - platform: mqtt
+    name: 'Uta room lamp'
+    command_topic: 'cmnd/sonoff_room_uta_02/power'
+    state_topic: 'stat/sonoff_room_uta_02/POWER'
+    qos: 1
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    retain: true
+
+# Sonoff (temp 07)
+  - platform: mqtt
+    name: 'Sonoff (temp 07)'
+    command_topic: 'cmnd/sonoff_wire_07/power'
+    state_topic: 'stat/sonoff_wire_07/POWER'
+    qos: 1
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    retain: true

@@ -1,0 +1,78 @@
+# Telegram notifications
+- alias: Door opened notify
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: binary_sensor.door_window_sensor_158d0001700885
+    to: 'on'
+  action:
+    - service: notify.telegram_bot
+      data:
+        title: '*Door sensor*'
+        message: "Door opened!"
+
+- alias: Door closed notify
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: binary_sensor.door_window_sensor_158d0001700885
+    to: 'off'
+  action:
+    - service: notify.telegram_bot
+      data:
+        title: '*Door sensor*'
+        message: "Door closed!"
+
+# Switch ON hall light on open (only if coming in)
+- alias: Door opened
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: binary_sensor.door_window_sensor_158d0001700885
+    to: 'on'
+  condition:
+    condition: and
+    conditions:
+      # TODO: use light sensor when I have it
+      - condition: time
+        after: '13:00:00'
+        before: '03:00:00'
+      - condition: state
+        entity_id: binary_sensor.motion_sensor_158d000155b56e
+        state: 'off'
+  action:
+    - service: light.turn_on
+      entity_id: light.hall
+
+# Turn ON the kettle on door open
+- alias: Turn on kettle when door opens
+  initial_state: 'off'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.door_window_sensor_158d0001700885
+    to: 'on'
+  action:
+    - service: switch.turn_on
+      entity_id: switch.bw_kettle
+
+- alias: Turn on door atomation after 10 minutes idle
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: switch.bw_kettle
+    to: 'off'
+    for:
+      minutes: 10
+  action:
+    - service: homeassistant.turn_on
+      entity_id: automation.turn_on_kettle_when_door_opens
+
+- alias: Turn off door automation when turning on the kettle
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: switch.bw_kettle
+    to: 'on'
+  action:
+    - service: homeassistant.turn_off
+      entity_id: automation.turn_on_kettle_when_door_opens

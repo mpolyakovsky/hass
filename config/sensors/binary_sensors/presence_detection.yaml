@@ -1,0 +1,40 @@
+- platform: template
+  sensors:
+    someone_is_home:
+      value_template: >-
+        {{ is_state('group.anyone', 'home') }}
+
+    nobody_is_home:
+      value_template:  >-
+        {{ not is_state('group.anyone', 'home') }}
+
+    everyone_is_home:
+      value_template: >-
+        {{ is_state('group.everyone', 'home') }}
+
+    mike_is_home:
+      value_template: >-
+        {{ is_state('person.mike', 'home') }}
+
+    only_mike_is_home:
+      value_template: >-
+        {{ is_state('person.mike', 'home')
+           and is_state('sensor.people_at_home_count', '1') }}
+
+    lena_is_home:
+      value_template: >-
+        {{ is_state('person.lena', 'home') }}
+
+    only_lena_is_home:
+      value_template: >-
+        {{ is_state('person.lena', 'home')
+           and is_state('sensor.people_at_home_count', '1') }}
+
+    uta_is_home:
+      value_template: >-
+        {{ is_state('person.utah', 'home') }}
+
+    only_uta_is_home:
+      value_template: >-
+        {{ is_state('person.utah', 'home')
+           and is_state('sensor.people_at_home_count', '1') }}

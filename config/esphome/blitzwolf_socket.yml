@@ -1,0 +1,95 @@
+substitutions:
+  dns_name: blitzwolf_switch
+  entity_name: bw_humidifier
+  # Higher value gives lower watt readout
+  current_res: "0.00634"
+
+esphome:
+  name: ${dns_name}
+  platform: ESP8266
+  board: esp8285
+
+wifi:
+  ssid: "100-27"
+  password: "147896321"
+  fast_connect: true
+  manual_ip:
+    static_ip: 192.168.0.50
+    gateway: 192.168.0.1
+    subnet: 255.255.255.0
+
+# Enable logging
+logger:
+
+# Enable Web server
+web_server:
+  port: 80
+
+# Enable Home Assistant API
+api:
+  password: "hass-kg100"
+
+ota:
+  password: "hass-kg100"
+
+time:
+  - platform: homeassistant
+    id: homeassistant_time
+
+status_led:
+  pin:
+    number: GPIO13
+    inverted: True
+
+binary_sensor:
+  - platform: gpio
+    pin: GPIO3
+    id: bw_binary_sensor
+    name: "${entity_name}_sensor"
+    on_press:
+      then:
+        - switch.toggle: fake_bw_button
+
+switch:
+  - platform: template
+    name: $entity_name
+    lambda: |-
+      if (id(bw_relay).state) {
+        return true;
+      } else {
+        return false;
+      }
+    id: fake_bw_button
+    turn_on_action:
+      - switch.turn_on: bw_relay
+      - switch.turn_on: bw_led
+    turn_off_action:
+      - switch.turn_off: bw_relay
+      - switch.turn_off: bw_led
+
+  - platform: gpio
+    id: bw_relay
+    pin: GPIO14
+
+  - platform: gpio
+    id: bw_led
+    pin: GPIO1
+    inverted: True
+
+sensor:
+  - platform: hlw8012
+    sel_pin:
+      number: GPIO12
+      inverted: True
+    cf_pin: GPIO04
+    cf1_pin: GPIO05
+    current_resistor: ${current_res}
+    power:
+      id: "${entity_name}_wattage"
+      name: "${entity_name}_wattage"
+      unit_of_measurement: W
+    change_mode_every: 8
+    update_interval: 10s
+
+  - platform: uptime
+    name: ${entity_name}_uptime

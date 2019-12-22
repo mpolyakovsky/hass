@@ -1,0 +1,43 @@
+ac_on_cool:
+  alias: AC on cool
+  sequence:
+    - service: climate.turn_on
+      entity_id: climate.mitsubishi_ac
+    - service: climate.set_operation_mode
+      data:
+        entity_id: climate.mitsubishi_ac
+        operation_mode: cool
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.mitsubishi_ac
+        temperature: 21
+
+ac_cool_auto:
+  alias: AC cool auto
+  sequence:
+    - service: script.turn_on
+      entity_id: script.ac_on_cool
+    - service: climate.set_fan_mode
+      data:
+        entity_id: climate.mitsubishi_ac
+        fan_mode: highest
+
+ac_cool_highest:
+  alias: AC cool max
+  sequence:
+    - service: script.turn_on
+      entity_id: script.ac_on_cool
+    - service: climate.set_fan_mode
+      data:
+        entity_id: climate.mitsubishi_ac
+        fan_mode: highest
+
+ac_cool_low:
+  alias: AC cool low
+  sequence:
+    - service: script.turn_on
+      entity_id: script.ac_on_cool
+    - service: climate.set_fan_mode
+      data:
+        entity_id: climate.mitsubishi_ac
+        fan_mode: low

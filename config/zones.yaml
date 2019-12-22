@@ -1,0 +1,29 @@
+  - name: Home
+    latitude: 53.9324061
+    longitude: 27.4286264
+    radius: 250
+    icon: mdi:home-heart
+
+  - name: Work
+    latitude: 53.899842
+    longitude: 27.543701
+    radius: 200
+    icon: mdi:worker
+
+  - name: Work
+    latitude: 53.919355
+    longitude: 27.582893
+    radius: 200
+    icon: mdi:worker
+
+  - name: School
+    latitude: 53.898129
+    longitude: 27.589978
+    radius: 150
+    icon: mdi:school
+
+  - name: Mike's parents
+    latitude: 53.922113
+    longitude: 27.584648
+    radius: 200
+    icon: mdi:home-assistant

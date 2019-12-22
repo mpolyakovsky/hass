@@ -1,0 +1,108 @@
+light.gateway_light_34ce008bf588:
+  friendly_name: Gateway light
+  icon: mdi:circle-slice-8
+binary_sensor.motion_sensor_158d000155b56e:
+  friendly_name: Motion Sensor (Hall)
+binary_sensor.motion_sensor_158d000123519e:
+  friendly_name: Motion Sensor (Room)
+binary_sensor.motion_sensor_158d0002f3c297:
+  friendly_name: Motion Sensor (Kitchen)
+binary_sensor.motion_sensor_158d000313953f:
+  friendly_name: Motion Sensor (Wardrobe)
+binary_sensor.door_window_sensor_158d0001700885:
+  friendly_name: Door Sensor (Main door)
+binary_sensor.door_window_sensor_158d0002e219b0:
+  friendly_name: AC status sensor
+binary_sensor.switch_158d0001837b93:
+  friendly_name: Button (room)
+binary_sensor.switch_158d0001d6209b:
+  name: kitchen_button
+  friendly_name: Button (kitchen)
+binary_sensor.switch_158d0001d6a946:
+  friendly_name: Button (temp 01)
+binary_sensor.switch_158d0001d6aa5d:
+  friendly_name: Button (hall)
+binary_sensor.switch_158d0001d8e1fe:
+  friendly_name: Button (uta)
+sensor.illumination_34ce008bf588:
+  friendly_name: Light level
+sensor.broadlink_sensor_humidity:
+  friendly_name: Humidity
+  icon: mdi:water-percent
+sensor.broadlink_sensor_temperature:
+  friendly_name: Temperature
+sensor.yr_symbol:
+  friendly_name: Weather
+media_player.kitchen_tv:
+  friendly_name: Chrome casting
+
+# Lights
+light.uta_table_lamp:
+  name: Uta's table lamp
+  icon: mdi:desk-lamp
+light.uta_room_lamp:
+  name: Uta's room lamp
+  icon: mdi:track-light
+light.uta_room_garland:
+  friendly_name: Garland Uta
+  icon: mdi:spotlight-beam
+light.table_lamp:
+  icon: mdi:lightbulb-outline
+light.room_light:
+  name: Light
+  icon: mdi:ceiling-light
+light.hall_night:
+  icon: mdi:checkbox-intermediate
+light.hall:
+  icon: mdi:ceiling-light
+light.kitchen_garland:
+  icon: mdi:spotlight-beam
+light.kitchen_candles:
+  friendly_name: Candles
+  icon: mdi:candle
+light.balcony:
+  icon: mdi:lightbulb-on
+light.yeelight_plus_strip:
+  friendly_name: LED
+  icon: mdi:led-strip
+
+person.mike:
+  entity_picture: "/local/mike_avatar.jpg"
+person.lena:
+  entity_picture: "/local/lena_avatar.jpg"
+person.utah:
+  entity_picture: "/local/utah_avatar.jpg"
+
+device_tracker.nmap_lena_laptop:
+  friendly_name: Lena Laptop
+device_tracker.nmap_mike_laptop:
+  friendly_name: Mike Laptop
+device_tracker.nmap_xiaomi_redmi:
+  friendly_name: Uta Mobile
+device_tracker.nmap_galaxy_tab_a_2016:
+  friendly_name: Mike Tablet
+
+input_boolean.alarm_clock_status:
+  friendly_name: 'Alarm Clock Status'
+  icon: mdi:alarm-check
+
+sensor.sunrise_time:
+  unit_of_measurement: AM
+sensor.sunset_time:
+  unit_of_measurement: PM
+
+switch.10343760ecfabc342a94:
+  name: bw_blitzwolf
+  friendly_name: Blitzwolf
+
+switch.bw_humidifier:
+  friendly_name: Humidifier
+
+sensor.next_8:
+  friendly_name: Next Electrobus 8
+
+sensor.next_42:
+  friendly_name: Next 42
+
+sensor.next_to_metro:
+  friendly_name: Next bus to Metro

@@ -1,0 +1,59 @@
+- platform: group
+  name: Kitchen
+  entities:
+    - light.kitchen_zone
+    - light.kitchen_garland
+    - light.yeelight_plus_strip
+    - light.kitchen_candles
+    - light.balcony
+
+# TODO home assistant scenes
+
+- platform: group
+  name: Kitchen Romantic On
+  entities:
+    - light.yeelight_plus_strip
+    - light.kitchen_garlands
+    - light.kitchen_candles
+
+- platform: group
+  name: Kitchen Romantic Off
+  entities:
+    - light.kitchen_zone
+    - light.all_hall
+
+- platform: group
+  name: All Hall
+  entities:
+    - light.hall
+    - light.hall_night
+
+- platform: group
+  name: Room Uta
+  entities:
+    - light.uta_room_lamp
+    - light.uta_table_lamp
+
+- platform: group
+  name: Room
+  entities:
+    - light.room_light
+    - light.room_uta
+
+- platform: group
+  name: All Lights
+  entities:
+    - light.all_garlands
+    - light.room
+    - light.kitchen
+    - light.hall
+    - light.gateway_light_34ce008bf588
+
+- platform: group
+  name: All Lights but Hall
+  entities:
+    - light.all_garlands
+    - light.room
+    - light.kitchen
+    - light.hall_night
+    - light.gateway_light_34ce008bf588

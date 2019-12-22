@@ -1,0 +1,6 @@
+- cal_id: home.assistant.mike@gmail.com
+  entities:
+  - device_id: home_assistant_mike_gmail_com
+    ignore_availability: true
+    name: home.assistant.mike@gmail.com
+    track: true

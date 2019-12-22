@@ -1,0 +1,23 @@
+- platform: workday
+  country: BY
+  add_holidays:
+    - '2020-01-02'
+    - '2020-01-06'
+    - '2020-04-27'
+
+- platform: tod
+  name: dark time
+  after: sunset
+  after_offset: '00:30'
+  before: sunrise
+  before_offset: '-00:00'
+
+- platform: tod
+  name: time to sleep
+  after: '22:00'
+  before: '06:00'
+
+- platform: tod
+  name: dnd
+  after: '23:00'
+  before: '7:00'

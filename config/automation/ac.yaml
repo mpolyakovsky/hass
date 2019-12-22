@@ -1,0 +1,21 @@
+# Air Conditioner automation
+
+# IF no one is home
+# AND IF Mike is going home
+#    => IF Mike left work
+#    => IF Mike is moving
+#    => AND IF proximity is less than 5 (?)
+#    => AND IF dir of travel is towards
+#    => for at least 5-10 minutes (?)
+# IF outside temp is more than 25 (?)
+# IF inside temp is more than 23 (?)
+# THEN turn on ac
+
+# IF someone arrived home (not mike)
+# THEN turn off ac
+
+# IF only mike arrived home
+# THEN slow down the fan a bit
+
+
+

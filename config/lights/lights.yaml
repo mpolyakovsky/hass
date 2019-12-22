@@ -1,0 +1,22 @@
+  # esphome
+  - platform: switch
+    name: Uta Table Lamp
+    entity_id: switch.uta_table_lamp
+
+  # esphome
+  - platform: switch
+    name: Uta Room Lamp
+    entity_id: switch.uta_room_lamp
+
+  # esphome
+  - platform: switch
+    name: Room Table Lamp
+    entity_id: switch.sonoff_room_table_lamp
+
+    # shelly kitchen zone | 192.168.0.14
+  - platform: mqtt
+    name: Kitchen Zone
+    command_topic: 'shellies/shelly1-E200B9/relay/0/command'
+    state_topic: 'shellies/shelly1-E200B9/relay/0'
+    payload_on: "on"
+    payload_off: "off"

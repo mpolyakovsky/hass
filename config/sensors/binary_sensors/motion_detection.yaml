@@ -1,0 +1,37 @@
+- platform: template
+  sensors:
+    motion_hall:
+      value_template: >-
+        {{ is_state('binary_sensor.motion_sensor_158d000155b56e', 'on') }}
+
+    motion_room:
+      value_template: >-
+        {{ is_state('binary_sensor.motion_sensor_158d000123519e', 'on') }}
+
+    motion_kitchen:
+      value_template: >-
+        {{ is_state('binary_sensor.motion_sensor_158d0002f3c297', 'on') }}
+
+    motion_wadrobe:
+      value_template: >-
+        {{ is_state('binary_sensor.motion_sensor_158d000313953f', 'on') }}
+
+    motion_flat:
+      value_template: >-
+        {{ is_state('group.motion_sensors', 'on') }}
+
+    no_motion:
+      value_template: >-
+        {{ is_state('group.motion_sensors', 'off') }}
+
+    no_motion_for_30_minutes:
+      value_template: >-
+        {{ is_state('group.motion_sensors', 'off') }}
+      delay_on:
+        minutes: 30
+
+    no_motion_for_an_hour:
+      value_template: >-
+        {{ is_state('group.motion_sensors', 'off') }}
+      delay_on:
+        minutes: 60

@@ -1,0 +1,9 @@
+wake_up:
+  alias: Wake up in the morning
+  sequence:
+    - service: script.turn_on
+      entity_id: script.gateway_wakeup_light
+    - service: media_player.turn_on
+      entity_id: media_player.samsung_tv
+    - service: light.turn_on
+      entity_id: light.kitchen_garlands

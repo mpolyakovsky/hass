@@ -1,0 +1,322 @@
+resources:
+  - url: /local/custom_lovelace/xiaomi_vacuum_map_card/xiaomi-vacuum-map-card.js
+    type: module
+
+title: Home
+views:
+  - title: Room
+    icon: mdi:home
+    badges:
+      - person.mike
+      - person.lena
+      - person.utah
+      - sensor.room_temperature
+      - sensor.room_humidity
+      - sensor.illumination_34ce008bf588
+      - binary_sensor.motion_sensor_158d000123519e
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: entities
+            title: Lights
+            show_header_toggle: true
+            entities:
+              - light.room_light
+              - light.uta_table_lamp
+              - light.uta_room_lamp
+              - light.gateway_light_34ce008bf588
+          - type: entities
+            title: Garlands
+            show_header_toggle: true
+            entities:
+            - light.room_garland
+            - light.bed_garland
+            - light.window_garland
+            - light.uta_room_garland
+      - type: vertical-stack
+        cards:
+          - type: picture-glance
+            title: Alarm Clock
+            entities:
+              - input_datetime.alarm_clock
+              - input_boolean.alarm_clock_status
+            image: /local/alarm_clock.jpg
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - input_datetime.alarm_clock
+            - input_boolean.alarm_clock_status
+      - type: thermostat
+        entity: climate.mitsubishi_ac
+      - type: vertical-stack
+        cards:
+        - type: picture-entity
+          # humidifier
+          entity: switch.bw_humidifier
+          tap_action:
+            action: toggle
+          state_image:
+            "on": /local/humidifier-on.jpg
+            "off": /local/humidifier-off.jpg
+        - type: conditional
+          conditions:
+            - entity: switch.bw_humidifier
+              state: "on"
+          card:
+            type: entities
+            entities:
+            - entity: sensor.bw_humidifier_wattage
+              name: Wattage
+        - type: entities
+          entities:
+            - automation.humidifier_auto_on
+
+  - title: Kitchen
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: entities
+            title: Motion
+            show_header_toggle: false
+            entities:
+              - entity: binary_sensor.motion_sensor_158d0002f3c297
+                format: relative
+          - type: conditional
+            conditions:
+              - entity: media_player.googlehome2365
+                state_not: "unavailable"
+            card:
+              type: media-control
+              entity: media_player.googlehome2365
+          - type: conditional
+            conditions:
+              - entity: media_player.kitchen_tv
+                state_not: "unavailable"
+            card:
+              type: media-control
+              entity: media_player.kitchen_tv
+          - type: picture-entity
+            entity: media_player.samsung_tv
+            tap_action:
+              action: call-service
+              service: media_player.toggle
+              service_data:
+                entity_id: media_player.samsung_tv
+            state_image:
+              "on": /local/tv-on.jpg
+              "off": /local/tv-off.jpg
+
+      - type: vertical-stack
+        cards:
+          - type: entities
+            title: Kitchen Lights
+            show_header_toggle: true
+            entities:
+              - light.kitchen_zone
+              - light.kitchen_garland
+              - light.yeelight_plus_strip
+              - light.kitchen_candles
+              - light.balcony
+
+          - type: horizontal-stack
+            cards:
+              - type: picture
+                image: /local/romantic_mode.jpg
+                tap_action:
+                  action: call-service
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.kitchen_romantic
+              - type: picture-entity
+                entity: light.kitchen_candles
+                tap_action:
+                  action: toggle
+                state_image:
+                  "on": /local/candles-on.jpg
+                  "off": /local/candles-off.jpg
+
+  - title: Hall
+    cards:
+      - type: entities
+        title: Motion
+        show_header_toggle: false
+        entities:
+          - entity: binary_sensor.motion_sensor_158d000155b56e
+            format: relative
+          - entity: binary_sensor.motion_sensor_158d000313953f
+            format: relative
+      - type: entities
+        title: Lights
+        show_header_toggle: true
+        entities:
+          - light.hall
+          - light.hall_night
+      - type: vertical-stack
+        cards:
+          - type: picture-entity
+            entity: vacuum.xiaomi_mi_robot
+            tap_action:
+              action: more-info
+            hold_action:
+              action: call-service
+              service: vacuum.locate
+              service_data:
+                entity_id: vacuum.xiaomi_vacuum_cleaner
+            image: /local/xiaomi-vacuum.jpg
+          - type: entities
+            entities:
+              - entity: automation.weekdays_cleaning
+                name: Scheduled cleaning
+
+  - title: Xmas lights
+    icon: mdi:christmas-lights
+    cards:
+      - type: entities
+        title: Kitchen Garlands
+        show_header_toggle: true
+        entities:
+          - light.kitchen_garland
+          - light.kitchen_window_garland
+          - light.christmas_tree
+          - light.cotton_garland
+          - light.christmas_table_tree
+      - type: entities
+        title: Room Garlands
+        show_header_toggle: true
+        entities:
+          - light.room_garland
+          - light.bed_garland
+          - light.window_garland
+          - light.uta_room_garland
+
+  - title: Climate
+    icon: mdi:weather-sunny
+    badges:
+      - sensor.sunrise_time
+      - sensor.sunset_time
+      - sun.sun
+      - sensor.yr_symbol
+    cards:
+    - type: weather-forecast
+      entity: weather.dark_sky
+    - type: sensor
+      entity: sensor.broadlink_sensor_humidity
+    - type: history-graph
+      refresh_interval: 300
+      hours_to_show: 24
+      entities:
+        - entity: sensor.broadlink_sensor_humidity
+          name: Humidity (room)
+        - entity: sensor.room_temperature
+          name: Temperature (room)
+
+  - title: Devices
+    icon: mdi:tablet
+    cards:
+      - type: entity-filter
+        show_empty: false
+        title: Alerts
+        entities:
+          - alert.humidifier_no_water
+          - alert.lena_laptop_on_when_lena_not_home
+          - alert.main_door
+          - alert.humidifier_manual_switch_off
+        state_filter:
+          - "on"
+      - type: entities
+        entities:
+          - entity: sensor.next_8
+            format: relative
+          - entity: sensor.next_42
+            format: relative
+          - entity: sensor.next_to_metro
+            format: relative
+      - type: entity-filter
+        title:
+        entities:
+          - device_tracker.nmap_lena_laptop
+          - device_tracker.nmap_mike_laptop
+          - device_tracker.nmap_xiaomi_redmi
+          - device_tracker.nmap_galaxy_tab_a_2016
+          - device_tracker.life360_lena
+        state_filter:
+          - "home"
+      - type: entity-filter
+        entities:
+          - device_tracker.nmap_lena_laptop
+          - device_tracker.nmap_mike_laptop
+          - device_tracker.nmap_xiaomi_redmi
+          - device_tracker.nmap_galaxy_tab_a_2016
+          - device_tracker.life360_lena
+        state_filter:
+          - "not_home"
+      - type: history-graph
+        title: Laptops
+        entities:
+          - entity: device_tracker.nmap_lena_laptop
+            name: Lena
+          - entity: device_tracker.nmap_mike_laptop
+            name: Mike
+      - type: history-graph
+        title: Mobiles
+        entities:
+          - entity: device_tracker.nmap_xiaomi_redmi
+            name: Uta
+          - entity: device_tracker.nmap_galaxy_tab_a_2016
+            name: Mike
+
+      - type: history-graph
+        title: Proximity
+        entities:
+          - proximity.home_lena
+          - sensor.dir_of_travel_lena
+          - proximity.home_mike
+          - sensor.dir_of_travel_mike
+
+  - title: System
+    icon: mdi:gauge
+    badges:
+      - sensor.time_online
+      - sensor.switch_battery_level
+      - sensor.motion_sensor_room_battery
+      - sensor.button_uta_battery_level
+      - sensor.door_sensor_battery_level
+      - sensor.motion_sensor_battery_level
+      - sensor.button_hall_battery_level
+      - sensor.button_kitchen_battery_level
+      - sensor.ac_sensor_battery
+      - sensor.motion_sensor_kitchen_battery
+      - sensor.motion_sensor_wardrobe_battery
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: gauge
+            entity: sensor.cpu_temp
+            name: CPU temp
+          - type: gauge
+            entity: sensor.processor_use
+            name: Processor use
+      - type: horizontal-stack
+        cards:
+          - type: gauge
+            entity: sensor.memory_use_percent
+            name: Memory use
+          - type: gauge
+            entity: sensor.swap_use_percent
+            name: Swap use
+
+  - title: Sensors
+    icon: mdi:access-point-network
+    cards:
+      - type: entities
+        title: Group Motion Sensors
+        entities:
+          - binary_sensor.no_motion
+          - binary_sensor.no_motion_for_30_minutes
+          - binary_sensor.no_motion_for_an_hour
+      - type: entities
+        title: Persistence
+        entities:
+          - binary_sensor.someone_is_home
+          - binary_sensor.nobody_is_home
+          - binary_sensor.everyone_is_home

@@ -1,0 +1,72 @@
+# esphome http://192.168.0.74
+- platform: switch
+  name: Bed Garland
+  entity_id: switch.sonoff_011_bed_garland
+
+# Sonoff (room garland) | http://192.168.0.51/
+- platform: mqtt
+  name: Room Garland
+  command_topic: 'cmnd/sonoff_wire_02/power'
+  state_topic: 'stat/sonoff_wire_02/POWER'
+
+# esphome http://192.168.0.81
+- platform: switch
+  name: Uta Room Garland
+  entity_id: switch.uta_garland
+
+# esphome | http://192.168.0.57/
+- platform: switch
+  name: Christmas Tree
+  entity_id: switch.sonoff_christmas_tree
+
+# Sonoff (rf 01) | http://192.168.0.68
+- platform: mqtt
+  name: Christmas Table Tree
+  command_topic: 'cmnd/sonoff_wire_rf_01/power'
+  state_topic: 'stat/sonoff_wire_rf_01/POWER'
+
+# esphome http://192.168.0.52
+- platform: switch
+  name: Cotton Garland
+  entity_id: switch.cotton_garland
+
+# esphome http://192.168.0.78
+- platform: switch
+  name: Kitchen Window Garland
+  entity_id: switch.sonoff_010_kitchen_garland
+
+# esphome http://192.168.0.74
+- platform: switch
+  name: Bed Garland
+  entity_id: switch.sonoff_011_bed_garland
+
+# esphome http://192.168.0.97
+- platform: switch
+  name: Window Garland
+  entity_id: switch.sonoff_012_window_garland
+
+# Christmas groups
+
+- platform: group
+  name: Kitchen Garlands
+  entities:
+    - light.yeelight_plus_strip
+    - light.cotton_garland
+    - light.christmas_table_tree
+    - light.kitchen_window_garland
+    - light.christmas_tree
+    - light.kitchen_garland
+
+- platform: group
+  name: Room Garlands
+  entities:
+    - light.room_garland
+    - light.window_garland
+    - light.bed_garland
+
+- platform: group
+  name: All Garlands
+  entities:
+    - light.kitchen_garlands
+    - light.room_garlands
+    - light.uta_room_garland

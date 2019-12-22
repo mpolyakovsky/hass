@@ -1,0 +1,68 @@
+# Turn OFF all lights
+all_off:
+  alias: Turn off ALL lights
+  sequence:
+    - service: light.turn_off
+      entity_id: light.all_lights
+    - service: homeassistant.turn_off
+      entity_id: light.gateway_light_34ce008bf588
+
+# Gateway night mode
+gateway_night_light:
+  alias: Night mode (gateway)
+  sequence:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: light.gateway_light_34ce008bf588
+        rgb_color: [255,0,0]
+        brightness: 15
+
+# Turn ON the gateway light slowly (1.5 minutes)
+# TODO: can we refactor this? loops or smth?
+gateway_wakeup_light:
+  alias: Wake up light in the morning
+  sequence:
+  - service: homeassistant.turn_on
+    data:
+      entity_id: light.gateway_light_34ce008bf588
+      rgb_color: [25,0,150]
+      brightness: 25
+  - delay:
+      seconds: 15
+  - service: homeassistant.turn_on
+    data:
+      entity_id: light.gateway_light_34ce008bf588
+      brightness: 75
+  - delay:
+      seconds: 15
+  - service: homeassistant.turn_on
+    data:
+      entity_id: light.gateway_light_34ce008bf588
+      brightness: 125
+  - delay:
+      seconds: 15
+  - service: homeassistant.turn_on
+    data:
+      entity_id: light.gateway_light_34ce008bf588
+      brightness: 175
+  - delay:
+      seconds: 15
+  - service: homeassistant.turn_on
+    data:
+      entity_id: light.gateway_light_34ce008bf588
+      brightness: 225
+  - delay:
+      seconds: 15
+  - service: homeassistant.turn_on
+    data:
+      entity_id: light.gateway_light_34ce008bf588
+      brightness: 255
+
+# ROMANTIC mode in kitchen
+kitchen_romantic:
+  alias: Romantic (kitchen)
+  sequence:
+    - service: light.turn_off
+      entity_id: light.kitchen_romantic_off
+    - service: light.turn_on
+      entity_id: light.kitchen_romantic_on

@@ -1,0 +1,51 @@
+# Scheduled cleaning
+# Start cleaning at 12:00
+# - IF scheduled with google calendar
+# - IF no one is home
+# - IF it's not a holiday
+# - IF hasn't cleaned today yet
+
+- alias: Weekdays cleaning
+  initial_state: true
+  trigger:
+    platform: time
+    at: '12:00:00'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: calendar.vacuum_cleaner
+        state: 'on'
+      - condition: state
+        entity_id: input_boolean.eva_cleaned_today
+        state: 'off'
+      - condition: state
+        entity_id: binary_sensor.workday_sensor
+        state: 'on'
+      - condition: state
+        entity_id: binary_sensor.nobody_is_home
+        state: 'on'
+  action:
+    service: vacuum.start
+    entity_id: vacuum.xiaomi_mi_robot
+
+- alias: Vacuum daily cleaned status
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: vacuum.xiaomi_mi_robot
+    to: 'cleaning'
+    for:
+      minutes: 20
+  action:
+    service: homeassistant.turn_on
+    entity_id: input_boolean.eva_cleaned_today
+
+- alias: Reset vacuum daily status
+  initial_state: true
+  trigger:
+    platform: time
+    at: '03:00:00'
+  action:
+    service: homeassistant.turn_off
+    entity_id: input_boolean.eva_cleaned_today

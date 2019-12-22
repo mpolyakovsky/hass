@@ -1,0 +1,25 @@
+# RF broadlink
+
+- platform: switch
+  name: Kitchen Garland
+  entity_id: switch.garland
+
+- platform: switch
+  name: Kitchen Candles
+  entity_id: switch.candles
+
+- platform: switch
+  name: Balcony
+  entity_id: switch.balcony
+
+- platform: switch
+  name: Hall
+  entity_id: switch.hall
+
+- platform: switch
+  name: Hall Night
+  entity_id: switch.hall_night
+
+- platform: switch
+  name: Room Light
+  entity_id: switch.room_light

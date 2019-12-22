@@ -1,0 +1,11 @@
+.cloud/*
+.idea/*
+.storage/*
+themes/*
+www/*
+deps
+tts
+*.log
+.uuid
+*.db
+secrets.yaml

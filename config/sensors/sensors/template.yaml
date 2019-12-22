@@ -1,0 +1,49 @@
+# Template sensors
+- platform: template
+  sensors:
+    sunset_time:
+      value_template: '{% set timestamp = as_timestamp(states.sun.sun.attributes.next_setting) | timestamp_custom("%I:%M") %} {{ timestamp.lstrip("0") }}'
+      friendly_name: "Sunset"
+    sunrise_time:
+      value_template: '{% set timestamp = as_timestamp(states.sun.sun.attributes.next_rising) | timestamp_custom("%I:%M") %} {{ timestamp.lstrip("0") }}'
+      friendly_name: "Sunrise"
+
+    room_light:
+      unit_of_measurement: "lm"
+      friendly_name: Light level
+      value_template: "{{ states('sensor.illumination_34ce008bf588') }}"
+    room_temperature:
+      unit_of_measurement: "°C"
+      friendly_name: Temp
+      value_template: "{{ states('sensor.broadlink_sensor_temperature') }}"
+    room_humidity:
+      unit_of_measurement: "%"
+      friendly_name: Humidity
+      value_template: "{{ states('sensor.broadlink_sensor_humidity') }}"
+    outside_temperature:
+      unit_of_measurement: "°C"
+      friendly_name: Outside temperature
+      value_template: '{{ states.weather.dark_sky.attributes.temperature | float }}'
+    outside_humidity:
+      unit_of_measurement: "%"
+      friendly_name: Outside humidity
+      value_template: '{{ states.weather.dark_sky.attributes.humidity | float }}'
+
+    dir_of_travel_mike:
+      friendly_name: Mike direction of travel
+      value_template: '{{ states.proximity.home_mike.attributes.dir_of_travel }}'
+    dir_of_travel_lena:
+      friendly_name: Lena direction of travel
+      value_template: '{{ states.proximity.home_lena.attributes.dir_of_travel }}'
+
+    people_at_home_count:
+      entity_id:
+        - person.lena
+        - person.mike
+        - person.utah
+      friendly_name: "How many people are at home?"
+      value_template: >-
+        {{ states.person | selectattr('state', 'eq', 'home') | list | count | int }}
+
+    alarm_clock_time:
+      value_template: "{{ states.input_datetime.alarm_clock.attributes.timestamp | int | timestamp_custom('%H:%M', False) }}"

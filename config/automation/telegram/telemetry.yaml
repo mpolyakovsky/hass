@@ -1,0 +1,32 @@
+- alias: 'Telegram bot that reply pong to ping'
+  initial_state: true
+  trigger:
+    platform: event
+    event_type: telegram_command
+    event_data:
+      command: '/ping'
+  action:
+    - service: notify.telegram_bot
+      data:
+        message: 'pong'
+
+- alias: 'Telegram telemetry'
+  initial_state: true
+  trigger:
+    platform: event
+    event_type: telegram_command
+    event_data:
+      command: '/temp'
+  action:
+    - service: telegram_bot.send_message
+      data_template:
+        title: '*Telemetry*'
+        target: '{{ trigger.event.data.user_id }}'
+        disable_notification: true
+        message: >
+          Temperature: {{ states.sensor.room_temperature.state }} °C.
+
+          Humidity: {{ states.sensor.broadlink_sensor_humidity.state }}%.
+
+          Light: {{ states.sensor.room_light.state }} lm.
+

@@ -1,0 +1,198 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude
+  longitude: !secret longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 220
+  unit_system: metric
+  time_zone: Europe/Minsk
+  customize: !include config/customize.yaml
+
+cloud:
+
+light: !include_dir_merge_list config/lights/
+sensor: !include_dir_merge_list config/sensors/sensors/
+binary_sensor: !include_dir_merge_list config/sensors/binary_sensors/
+zone: !include config/zones.yaml
+person: !include config/persons.yaml
+group: !include config/groups.yaml
+script: !include_dir_merge_named config/scripts/
+switch: !include_dir_merge_list config/switch/
+automation: !include_dir_merge_list config/automation/
+alert: !include config/alerts.yaml
+
+# Enables the frontend
+frontend:
+  javascript_version: latest
+  themes: !include_dir_merge_named themes
+
+lovelace:
+  mode: yaml
+
+# Enables configuration UI
+config:
+
+http:
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+#  base_url: hass-kg100.duckdns.org:8123
+#  ssl_certificate: /ssl/fullchain.pem
+#  ssl_key: /ssl/privkey.pem
+
+# Discover some devices automatically
+discovery:
+  ignore:
+    - yeelight
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# The recorder component is responsible for storing details in a database
+recorder:
+
+# View all events in a logbook
+logbook:
+
+# The System Health component provides an API to offer information on the system and its components.
+system_health:
+
+# Track the sun
+sun:
+
+# Show the map
+map:
+
+life360:
+  accounts:
+    username: !secret life360_username
+    password: !secret life360_password
+  show_as_state:
+    - moving
+  driving_speed: 18
+  max_gps_accuracy: 200
+  max_update_wait:
+    minutes: 45
+
+google:
+  client_id: !secret google_api_client_id
+  client_secret: !secret google_api_client_secret
+
+device_tracker:
+  - platform: bluetooth_tracker
+    interval_seconds: 15
+    consider_home: 300
+    track_new_devices: true
+
+  - platform: nmap_tracker
+    home_interval: 5
+    hosts:
+      - 192.168.0.52 # Redmi5
+      - 192.168.0.88 # Mike tablet
+      - 192.168.0.93 # Lena note
+      - 192.168.0.23 # Mike note
+
+proximity:
+  home_mike:
+    ignored_zones:
+      - work
+    devices:
+      - device_tracker.life360_mike
+    tolerance: 100
+    unit_of_measurement: m
+
+  home_lena:
+    ignored_zones:
+      - work
+    devices:
+      - device_tracker.life360_lena
+    tolerance: 100
+    unit_of_measurement: m
+
+smartir:
+
+weather:
+  - platform: darksky
+    api_key: !secret darksky_api_key
+    units: ca
+    mode: daily
+
+climate:
+  - platform: smartir
+    name: Mitsubishi AC
+    unique_id: mitsubishi_ac
+    device_code: 1120
+    controller_data: 192.168.0.47
+    temperature_sensor: sensor.room_temperature
+    power_sensor: binary_sensor.door_window_sensor_158d0002e219b0
+
+media_player:
+  - platform: smartir
+    name: Samsung TV
+    unique_id: samsung_tv
+    device_code: 1060
+    controller_data: 192.168.0.96
+    power_sensor: binary_sensor.tv_is_on
+
+vacuum:
+  - platform: xiaomi_miio
+    name: 'Xiaomi Mi Robot'
+    host: 192.168.0.49
+    token: !secret xiaomi_mi_robot_token
+
+xiaomi_aqara:
+  gateways:
+    - mac: '34ce008bf588'
+      key: !secret aqara_key
+
+yeelight:
+  devices:
+    192.168.0.36:
+      name: yeelight plus strip
+
+tuya:
+  username: !secret tuya_username
+  password: !secret tuya_password
+  country_code: 375
+
+mqtt:
+  broker: 192.168.0.100
+  username: !secret mqtt_user
+  password: !secret mqtt_password
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+media_extractor:
+
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_token
+    allowed_chat_ids:
+    - 478823057
+
+notify:
+  - name: telegram_bot
+    platform: telegram
+    chat_id: 478823057
+
+# Custom inputs
+input_datetime:
+  alarm_clock:
+    name: 'Alarm Clock'
+    has_time: true
+    has_date: false
+
+input_boolean:
+  alarm_clock_status:
+    initial: on
+  vacations:
+    initial: off
+  sick:
+    initial: off
+  eva_cleaned_today:
+    initial: off

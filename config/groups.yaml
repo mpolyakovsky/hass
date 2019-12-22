@@ -1,0 +1,44 @@
+adults:
+  name: Adults
+  all: true
+  entities:
+    - person.lena
+    - person.mike
+
+any_adult:
+  name: Any adult
+  entities:
+    - person.lena
+    - person.mike
+
+kids:
+  name: Kids
+  all: true
+  entities:
+    - person.utah
+
+any_kid:
+  name: Any kid
+  entities:
+    - person.utah
+
+everyone:
+  name: everyone
+  all: true
+  entities:
+    - group.adults
+    - group.kids
+
+anyone:
+  name: Anyone
+  entities:
+    - group.any_adult
+    - group.any_kid
+
+motion_sensors:
+  name: Motion Sensors
+  entities:
+    - binary_sensor.motion_sensor_158d000155b56e
+    - binary_sensor.motion_sensor_158d000123519e
+    - binary_sensor.motion_sensor_158d0002f3c297
+    - binary_sensor.motion_sensor_158d000313953f
