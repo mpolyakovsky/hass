@@ -9,6 +9,12 @@
   command_topic: 'cmnd/sonoff_wire_02/power'
   state_topic: 'stat/sonoff_wire_02/POWER'
 
+# Sonoff (rf 01) | http://192.168.0.68
+- platform: mqtt
+  name: Christmas Table Tree
+  command_topic: 'cmnd/sonoff_wire_rf_01/power'
+  state_topic: 'stat/sonoff_wire_rf_01/POWER'
+
 # esphome http://192.168.0.81
 - platform: switch
   name: Uta Room Garland
@@ -18,12 +24,6 @@
 - platform: switch
   name: Christmas Tree
   entity_id: switch.sonoff_christmas_tree
-
-# Sonoff (rf 01) | http://192.168.0.68
-- platform: mqtt
-  name: Christmas Table Tree
-  command_topic: 'cmnd/sonoff_wire_rf_01/power'
-  state_topic: 'stat/sonoff_wire_rf_01/POWER'
 
 # esphome http://192.168.0.52
 - platform: switch

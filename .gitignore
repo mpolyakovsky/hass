@@ -1,6 +1,8 @@
 .cloud/*
 .idea/*
 .storage/*
+custom_components/*
+custom_lovelace/*
 themes/*
 www/*
 deps
