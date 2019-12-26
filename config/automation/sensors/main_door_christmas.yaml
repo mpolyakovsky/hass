@@ -1,5 +1,5 @@
 # Switch ON christmas lights on open
-- alias: Door opened
+- alias: Door opened xmas 16 till 18
   initial_state: true
   trigger:
     platform: state
@@ -16,12 +16,12 @@
         state: 'off'
   action:
     - delay:
-        seconds: 2
+        seconds: 1
     - service: light.turn_on
-      entity_id: light.room_garlands
+      entity_id: light.all_garlands_but_uta
 
 # Switch ON christmas lights on open
-- alias: Door opened
+- alias: Door opened xmas 18 till 21
   initial_state: true
   trigger:
     platform: state
@@ -38,12 +38,12 @@
         state: 'off'
   action:
     - delay:
-        seconds: 2
+        seconds: 1
     - service: light.turn_on
-      entity_id: light.all_garlands
+      entity_id: light.all_garlands_but_uta
 
 # Switch ON christmas lights on open
-- alias: Door opened
+- alias: Door opened xmas 21 till 3
   initial_state: true
   trigger:
     platform: state
@@ -60,6 +60,6 @@
         state: 'off'
   action:
     - delay:
-        seconds: 2
+        seconds: 1
     - service: light.turn_on
       entity_id: light.kitchen_garlands

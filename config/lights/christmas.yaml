@@ -70,3 +70,9 @@
     - light.kitchen_garlands
     - light.room_garlands
     - light.uta_room_garland
+
+- platform: group
+  name: All Garlands but Uta
+  entities:
+    - light.kitchen_garlands
+    - light.room_garlands
