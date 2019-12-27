@@ -37,7 +37,7 @@
 - platform: group
   name: Room
   entities:
-    - light.room_light
+    - light.room
     - light.room_uta
 
 - platform: group

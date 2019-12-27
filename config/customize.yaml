@@ -48,7 +48,7 @@ light.uta_room_garland:
   icon: mdi:spotlight-beam
 light.table_lamp:
   icon: mdi:lightbulb-outline
-light.room_light:
+light.room:
   name: Light
   icon: mdi:ceiling-light
 light.hall_night:

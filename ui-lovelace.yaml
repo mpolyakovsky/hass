@@ -21,7 +21,7 @@ views:
             title: Lights
             show_header_toggle: true
             entities:
-              - light.room_light
+              - light.room
               - light.uta_table_lamp
               - light.uta_room_lamp
               - light.gateway_light_34ce008bf588
