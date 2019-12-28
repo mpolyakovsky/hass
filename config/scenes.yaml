@@ -1,0 +1,16 @@
+- name: Kitchen xmas romantic
+  entities:
+    light.yeelight_plus_strip: on
+    light.kitchen_garlands: on
+    light.kitchen_candles: on
+    light.kitchen_zone: off
+    light.all_hall: off
+
+- name: Room xmas romantic
+  entities:
+    light.hall: off
+    light.room: off
+    light.uta_room_garland: off
+    light.room_garland: off
+    light.window_garland: on
+    light.bed_garland: on

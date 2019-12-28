@@ -35,7 +35,7 @@
     - light.uta_table_lamp
 
 - platform: group
-  name: Room
+  name: Room All
   entities:
     - light.room
     - light.room_uta
@@ -44,7 +44,7 @@
   name: All Lights
   entities:
     - light.all_garlands
-    - light.room
+    - light.room_all
     - light.kitchen
     - light.hall
     - light.gateway_light_34ce008bf588
@@ -53,7 +53,7 @@
   name: All Lights but Hall
   entities:
     - light.all_garlands
-    - light.room
+    - light.room_all
     - light.kitchen
     - light.hall_night
     - light.gateway_light_34ce008bf588
