@@ -121,6 +121,12 @@ weather:
     units: ca
     mode: daily
 
+remote:
+  - platform: broadlink
+    host: 192.168.0.47
+    mac: 'b4:43:0d:f9:32:b1'
+    name: rm_mini
+
 climate:
   - platform: smartir
     name: Mitsubishi AC
