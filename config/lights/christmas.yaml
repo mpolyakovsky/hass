@@ -54,7 +54,6 @@
     - light.cotton_garland
     - light.christmas_table_tree
     - light.kitchen_window_garland
-    - light.christmas_tree
     - light.kitchen_garland
 
 - platform: group
@@ -63,6 +62,7 @@
     - light.room_garland
     - light.window_garland
     - light.bed_garland
+    - light.christmas_tree
 
 - platform: group
   name: All Garlands
