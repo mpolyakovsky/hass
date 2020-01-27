@@ -177,7 +177,6 @@ views:
         entities:
           - light.kitchen_garland
           - light.kitchen_window_garland
-          - light.christmas_tree
           - light.cotton_garland
           - light.christmas_table_tree
       - type: entities
@@ -188,6 +187,7 @@ views:
           - light.bed_garland
           - light.window_garland
           - light.uta_room_garland
+          - light.christmas_tree
 
   - title: Climate
     icon: mdi:weather-sunny
