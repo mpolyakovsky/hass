@@ -1,1 +1,25 @@
-# TODO
+# No motion for half an hour
+- alias: No motion 30 min
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: binary_sensor.motion_sensor_158d0002f3c297
+    to: 'off'
+    for:
+      minutes: 30
+  action:
+    - service: light.turn_off
+      entity_id: light.kitchen
+
+# No motion for an hour
+- alias: No motion 60 min
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: binary_sensor.motion_sensor_158d0002f3c297
+    to: 'off'
+    for:
+      minutes: 60
+  action:
+    - service: light.turn_off
+      entity_id: light.kitchen_garlands

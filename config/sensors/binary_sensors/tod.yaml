@@ -1,7 +1,6 @@
 - platform: workday
   country: BY
   add_holidays:
-    - '2020-01-02'
     - '2020-01-06'
     - '2020-04-27'
 
