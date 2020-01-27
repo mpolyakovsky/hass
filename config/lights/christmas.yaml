@@ -65,6 +65,13 @@
     - light.christmas_tree
 
 - platform: group
+  name: Room Christmas Garlands
+  entities:
+    - light.window_garland
+    - light.bed_garland
+    - light.christmas_tree
+
+- platform: group
   name: All Garlands
   entities:
     - light.kitchen_garlands
@@ -76,3 +83,9 @@
   entities:
     - light.kitchen_garlands
     - light.room_garlands
+
+- platform: group
+  name: All Christmas Garlands
+  entities:
+    - light.kitchen_garlands
+    - light.room_christmas_garlands

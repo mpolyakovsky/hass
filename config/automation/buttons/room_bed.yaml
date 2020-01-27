@@ -21,7 +21,7 @@
       click_type: single
   action:
     - service: light.toggle
-      entity_id: light.room_garlands
+      entity_id: light.room_christmas_garlands
 
 - alias: Switch [hold]
   initial_state: true

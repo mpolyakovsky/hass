@@ -1,5 +1,6 @@
 wake_up:
   alias: Wake up in the morning
+  # TODO: moonlight?
   sequence:
     - service: script.turn_on
       entity_id: script.gateway_wakeup_light
