@@ -3,7 +3,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: binary_sensor.motion_sensor_158d000123519e
+    entity_id: binary_sensor.motion_sensor_room
     to: 'on' 
   condition:
     condition: and
@@ -27,10 +27,10 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: binary_sensor.motion_sensor_158d000123519e
+    entity_id: binary_sensor.motion_sensor_room
     to: 'off'
   action:
-    - service: homeassistant.turn_off
+    - service: light.turn_off
       data:
         entity_id: light.gateway_light_34ce008bf588
 
@@ -39,7 +39,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: binary_sensor.motion_sensor_158d000123519e
+    entity_id: binary_sensor.motion_sensor_room
     to: 'off'
     for:
       minutes: 4

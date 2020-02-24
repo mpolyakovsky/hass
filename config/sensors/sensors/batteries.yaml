@@ -4,26 +4,10 @@
         unit_of_measurement: "%"
         friendly_name: Battery (motion sensor)
         value_template: '{{ states.binary_sensor.motion_sensor_158d000155b56e.attributes.battery_level | int }}'
-      motion_sensor_room_battery:
-        unit_of_measurement: "%"
-        friendly_name: Battery (motion sensor room)
-        value_template: '{{ states.binary_sensor.motion_sensor_158d000123519e.attributes.battery_level | int }}'
-      motion_sensor_kitchen_battery:
-        unit_of_measurement: "%"
-        friendly_name: Battery (motion sensor kitchen)
-        value_template: '{{ states.binary_sensor.motion_sensor_158d0002f3c297.attributes.battery_level | int }}'
-      motion_sensor_wardrobe_battery:
-        unit_of_measurement: "%"
-        friendly_name: Battery (motion sensor wardrobe)
-        value_template: '{{ states.binary_sensor.motion_sensor_158d000313953f.attributes.battery_level | int }}'
       door_sensor_battery_level:
         unit_of_measurement: "%"
         friendly_name: Battery (door)
         value_template: '{{ states.binary_sensor.door_window_sensor_158d0001700885.attributes.battery_level | int }}'
-      ac_sensor_battery:
-        unit_of_measurement: "%"
-        friendly_name: Battery (ac sensor)
-        value_template: '{{ states.binary_sensor.door_window_sensor_158d0002e219b0.attributes.battery_level | int }}'
       switch_battery_level:
         unit_of_measurement: "%"
         friendly_name: Battery (switch)

@@ -13,7 +13,7 @@ views:
       - sensor.room_temperature
       - sensor.room_humidity
       - sensor.illumination_34ce008bf588
-      - binary_sensor.motion_sensor_158d000123519e
+      - binary_sensor.motion_sensor_room
     cards:
       - type: vertical-stack
         cards:
@@ -30,7 +30,7 @@ views:
             show_header_toggle: true
             entities:
             - light.room_garland
-            - light.bed_garland
+#            - light.bed_garland
             - light.window_garland
             - light.uta_room_garland
       - type: vertical-stack
@@ -51,7 +51,6 @@ views:
       - type: vertical-stack
         cards:
         - type: picture-entity
-          # humidifier
           entity: switch.bw_humidifier
           tap_action:
             action: toggle
@@ -76,11 +75,12 @@ views:
       - type: vertical-stack
         cards:
           - type: entities
-            title: Motion
+            title: Sensors
             show_header_toggle: false
             entities:
-              - entity: binary_sensor.motion_sensor_158d0002f3c297
+              - entity: binary_sensor.motion_sensor_kitchen
                 format: relative
+              - entity: sensor.motion_sensor_kitchen
           - type: conditional
             conditions:
               - entity: media_player.googlehome2365
@@ -138,13 +138,13 @@ views:
   - title: Hall
     cards:
       - type: entities
-        title: Motion
+        title: Sensors
         show_header_toggle: false
         entities:
           - entity: binary_sensor.motion_sensor_158d000155b56e
             format: relative
-          - entity: binary_sensor.motion_sensor_158d000313953f
-            format: relative
+          - entity: binary_sensor.motion_sensor_wardrobe
+          - entity: sensor.hall_light_level
       - type: entities
         title: Lights
         show_header_toggle: true
@@ -168,26 +168,26 @@ views:
               - entity: automation.weekdays_cleaning
                 name: Scheduled cleaning
 
-  - title: Xmas lights
-    icon: mdi:christmas-lights
-    cards:
-      - type: entities
-        title: Kitchen Garlands
-        show_header_toggle: true
-        entities:
-          - light.kitchen_garland
-          - light.kitchen_window_garland
-          - light.cotton_garland
-          - light.christmas_table_tree
-      - type: entities
-        title: Room Garlands
-        show_header_toggle: true
-        entities:
-          - light.room_garland
-          - light.bed_garland
-          - light.window_garland
-          - light.uta_room_garland
-          - light.christmas_tree
+#  - title: Xmas lights
+#    icon: mdi:christmas-lights
+#    cards:
+#      - type: entities
+#        title: Kitchen Garlands
+#        show_header_toggle: true
+#        entities:
+#          - light.kitchen_garland
+#          - light.kitchen_window_garland
+#          - light.cotton_garland
+#          - light.christmas_table_tree
+#      - type: entities
+#        title: Room Garlands
+#        show_header_toggle: true
+#        entities:
+#          - light.room_garland
+#          - light.bed_garland
+#          - light.window_garland
+#          - light.uta_room_garland
+#          - light.christmas_tree
 
   - title: Climate
     icon: mdi:weather-sunny
@@ -278,15 +278,15 @@ views:
     badges:
       - sensor.time_online
       - sensor.switch_battery_level
-      - sensor.motion_sensor_room_battery
+      - sensor.motion_sensor_room_battery_level
       - sensor.button_uta_battery_level
       - sensor.door_sensor_battery_level
       - sensor.motion_sensor_battery_level
       - sensor.button_hall_battery_level
       - sensor.button_kitchen_battery_level
-      - sensor.ac_sensor_battery
-      - sensor.motion_sensor_kitchen_battery
-      - sensor.motion_sensor_wardrobe_battery
+      - sensor.ac_battery_level
+      - sensor.motion_sensor_kitchen_battery_level
+      - sensor.motion_sensor_wardrobe_battery_level
     cards:
       - type: horizontal-stack
         cards:
@@ -310,12 +310,14 @@ views:
     cards:
       - type: entities
         title: Group Motion Sensors
+        show_header_toggle: false
         entities:
           - binary_sensor.no_motion
           - binary_sensor.no_motion_for_30_minutes
           - binary_sensor.no_motion_for_an_hour
       - type: entities
         title: Persistence
+        show_header_toggle: false
         entities:
           - binary_sensor.someone_is_home
           - binary_sensor.nobody_is_home

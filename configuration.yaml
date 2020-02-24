@@ -134,7 +134,7 @@ climate:
     device_code: 1120
     controller_data: 192.168.0.47
     temperature_sensor: sensor.room_temperature
-    power_sensor: binary_sensor.door_window_sensor_158d0002e219b0
+    power_sensor: binary_sensor.ac
 
 media_player:
   - platform: smartir
