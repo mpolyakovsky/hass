@@ -14,8 +14,8 @@ gateway_night_light:
     - service: homeassistant.turn_on
       data:
         entity_id: light.gateway_light_34ce008bf588
-        rgb_color: [255,0,0]
-        brightness: 15
+        color_name: orangered
+        brightness: 5
 
 # Turn ON the gateway light slowly (1.5 minutes)
 # TODO: can we refactor this? loops or smth?
@@ -25,7 +25,7 @@ gateway_wakeup_light:
   - service: homeassistant.turn_on
     data:
       entity_id: light.gateway_light_34ce008bf588
-      rgb_color: [25,0,150]
+      color_name: orangered
       brightness: 25
   - delay:
       seconds: 15
