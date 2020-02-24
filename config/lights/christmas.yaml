@@ -1,8 +1,3 @@
-# esphome http://192.168.0.74
-- platform: switch
-  name: Bed Garland
-  entity_id: switch.sonoff_011_bed_garland
-
 # Sonoff (room garland) | http://192.168.0.51/
 - platform: mqtt
   name: Room Garland
@@ -20,7 +15,7 @@
   name: Uta Room Garland
   entity_id: switch.uta_garland
 
-# esphome | http://192.168.0.57/
+# esphome | http://192.168.0.57
 - platform: switch
   name: Christmas Tree
   entity_id: switch.sonoff_christmas_tree
@@ -36,9 +31,9 @@
   entity_id: switch.sonoff_010_kitchen_garland
 
 # esphome http://192.168.0.74
-- platform: switch
-  name: Bed Garland
-  entity_id: switch.sonoff_011_bed_garland
+#- platform: switch
+#  name: Bed Garland
+#  entity_id: switch.sonoff_011_bed_garland
 
 # esphome http://192.168.0.97
 - platform: switch
@@ -52,7 +47,7 @@
   entities:
     - light.yeelight_plus_strip
     - light.cotton_garland
-    - light.christmas_table_tree
+#    - light.christmas_table_tree
     - light.kitchen_window_garland
     - light.kitchen_garland
 
@@ -61,15 +56,15 @@
   entities:
     - light.room_garland
     - light.window_garland
-    - light.bed_garland
-    - light.christmas_tree
+#    - light.bed_garland
+#    - light.christmas_tree
 
 - platform: group
   name: Room Christmas Garlands
   entities:
     - light.window_garland
-    - light.bed_garland
-    - light.christmas_tree
+#    - light.bed_garland
+#    - light.christmas_tree
 
 - platform: group
   name: All Garlands
