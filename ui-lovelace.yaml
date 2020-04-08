@@ -79,8 +79,9 @@ views:
             show_header_toggle: false
             entities:
               - entity: binary_sensor.motion_sensor_kitchen
-                format: relative
+                secondary_info: last-changed
               - entity: sensor.motion_sensor_kitchen
+                secondary_info: last-changed
           - type: conditional
             conditions:
               - entity: media_player.googlehome2365
@@ -142,9 +143,11 @@ views:
         show_header_toggle: false
         entities:
           - entity: binary_sensor.motion_sensor_158d000155b56e
-            format: relative
+            secondary_info: last-changed
           - entity: binary_sensor.motion_sensor_wardrobe
+            secondary_info: last-changed
           - entity: sensor.hall_light_level
+            secondary_info: last-changed
       - type: entities
         title: Lights
         show_header_toggle: true
@@ -197,18 +200,21 @@ views:
       - sun.sun
       - sensor.yr_symbol
     cards:
-    - type: weather-forecast
-      entity: weather.dark_sky
-    - type: sensor
-      entity: sensor.broadlink_sensor_humidity
-    - type: history-graph
-      refresh_interval: 300
-      hours_to_show: 24
-      entities:
-        - entity: sensor.broadlink_sensor_humidity
-          name: Humidity (room)
-        - entity: sensor.room_temperature
-          name: Temperature (room)
+      - type: vertical-stack
+        cards:
+          - type: weather-forecast
+            entity: weather.dark_sky
+      - type: vertical-stack
+        cards:
+          - type: sensor
+            entity: sensor.broadlink_sensor_humidity
+            hours_to_show: 24
+            graph: line
+          - type: sensor
+            entity: sensor.room_temperature
+            hours_to_show: 24
+            graph: line
+            name: Temperature
 
   - title: Devices
     icon: mdi:tablet
@@ -231,6 +237,9 @@ views:
             format: relative
           - entity: sensor.next_to_metro
             format: relative
+#      - type: iframe
+#        url: https://banki24.by/exchange/currencymarket
+#        aspect_ratio: 75%
       - type: entity-filter
         title:
         entities:
