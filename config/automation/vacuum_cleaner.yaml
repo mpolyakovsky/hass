@@ -6,7 +6,6 @@
 # - IF hasn't cleaned today yet
 
 - alias: Weekdays cleaning
-  initial_state: true
   trigger:
     platform: time
     at: '12:00:00'
@@ -30,7 +29,6 @@
     entity_id: vacuum.xiaomi_mi_robot
 
 - alias: Vacuum daily cleaned status
-  initial_state: true
   trigger:
     platform: state
     entity_id: vacuum.xiaomi_mi_robot
