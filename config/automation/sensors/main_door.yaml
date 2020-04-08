@@ -23,7 +23,7 @@
         title: '*Door sensor*'
         message: "Door closed!"
 
-# Switch ON hall light on open (only if coming in)
+# Turn ON hall light on open (only if coming in)
 - alias: Door opened
   initial_state: true
   trigger:
@@ -44,35 +44,24 @@
     - service: light.turn_on
       entity_id: light.hall
 
-# Turn ON the kettle on door open
-- alias: Turn on kettle when door opens
-  initial_state: 'off'
+# Turn ON kitchen warm led in the evening on door open
+- alias: Door opened in the evening
+  initial_state: true
   trigger:
     platform: state
     entity_id: binary_sensor.door_window_sensor_158d0001700885
     to: 'on'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: binary_sensor.dark_time
+        state: 'on'
+      - condition: state
+        entity_id: binary_sensor.motion_sensor_158d000155b56e
+        state: 'off'
   action:
-    - service: switch.turn_on
-      entity_id: switch.bw_kettle
-
-- alias: Turn on door atomation after 10 minutes idle
-  initial_state: true
-  trigger:
-    platform: state
-    entity_id: switch.bw_kettle
-    to: 'off'
-    for:
-      minutes: 10
-  action:
-    - service: homeassistant.turn_on
-      entity_id: automation.turn_on_kettle_when_door_opens
-
-- alias: Turn off door automation when turning on the kettle
-  initial_state: true
-  trigger:
-    platform: state
-    entity_id: switch.bw_kettle
-    to: 'on'
-  action:
-    - service: homeassistant.turn_off
-      entity_id: automation.turn_on_kettle_when_door_opens
+    - delay:
+        seconds: 1
+    - service: light.turn_on
+      entity_id: light.yeelight_plus_strip
