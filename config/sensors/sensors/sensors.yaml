@@ -45,6 +45,8 @@
     - Cur_OfficialRate
   value_template: '{{ value_json.Cur_OfficialRate }}'
 
+- platform: season
+
 # Yandex transport
 - platform: yandex_transport
   name: next to metro
