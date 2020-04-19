@@ -237,11 +237,22 @@ views:
             format: relative
           - entity: sensor.next_to_metro
             format: relative
-#      - type: iframe
-#        url: https://banki24.by/exchange/currencymarket
-#        aspect_ratio: 75%
+      - type: entities
+        title: Group Motion Sensors
+        show_header_toggle: false
+        entities:
+          - binary_sensor.no_motion
+          - binary_sensor.no_motion_for_30_minutes
+          - binary_sensor.no_motion_for_an_hour
+      - type: entities
+        title: Persistence
+        show_header_toggle: false
+        entities:
+          - binary_sensor.someone_is_home
+          - binary_sensor.nobody_is_home
+          - binary_sensor.everyone_is_home
       - type: entity-filter
-        title:
+        title: Home
         entities:
           - device_tracker.nmap_lena_laptop
           - device_tracker.nmap_mike_laptop
@@ -251,6 +262,7 @@ views:
         state_filter:
           - "home"
       - type: entity-filter
+        title: Away
         entities:
           - device_tracker.nmap_lena_laptop
           - device_tracker.nmap_mike_laptop
@@ -273,7 +285,6 @@ views:
             name: Uta
           - entity: device_tracker.nmap_galaxy_tab_a_2016
             name: Mike
-
       - type: history-graph
         title: Proximity
         entities:
@@ -284,20 +295,8 @@ views:
 
   - title: System
     icon: mdi:gauge
-    badges:
-      - sensor.time_online
-      - sensor.switch_battery_level
-      - sensor.motion_sensor_room_battery_level
-      - sensor.button_uta_battery_level
-      - sensor.door_sensor_battery_level
-      - sensor.motion_sensor_battery_level
-      - sensor.button_hall_battery_level
-      - sensor.button_kitchen_battery_level
-      - sensor.ac_battery_level
-      - sensor.motion_sensor_kitchen_battery_level
-      - sensor.motion_sensor_wardrobe_battery_level
     cards:
-      - type: horizontal-stack
+      - type: vertical-stack
         cards:
           - type: gauge
             entity: sensor.cpu_temp
@@ -305,29 +304,91 @@ views:
           - type: gauge
             entity: sensor.processor_use
             name: Processor use
-      - type: horizontal-stack
-        cards:
           - type: gauge
             entity: sensor.memory_use_percent
             name: Memory use
-          - type: gauge
-            entity: sensor.swap_use_percent
-            name: Swap use
+      - type: vertical-stack
+        cards:
+          - type: entity
+            entity: sensor.time_online
+          - type: entities
+            entities:
+            - sensor.switch_battery_level
+            - sensor.button_uta_battery_level
+            - sensor.door_sensor_battery_level
+            - sensor.motion_sensor_battery_level
+            - sensor.button_hall_battery_level
+            - sensor.button_kitchen_battery_level
+#            - sensor.ac_battery_level
+#            - sensor.motion_sensor_room_battery_level
+#            - sensor.motion_sensor_kitchen_battery_level
+#            - sensor.motion_sensor_wardrobe_battery_level
 
-  - title: Sensors
-    icon: mdi:access-point-network
+  - title: Settings
+    icon: mdi:gear
     cards:
+      - type: vertical-stack
+        cards:
+          - type: entities
+            title: Kitchen button
+            entities:
+              - automation.button_kitchen_single
+              - automation.button_kitchen_double
+              - automation.button_kitchen_hold
+          - type: entities
+            title: Bed button
+            entities:
+              - automation.button_bed_single
+              - automation.button_bed_double
+              - automation.button_bed_hold
+          - type: entities
+            title: Uta button
+            entities:
+              - automation.button_uta_single
+              - automation.button_uta_double
+              - automation.button_uta_hold
+          - type: entities
+            title: Hall button
+            entities:
+              - automation.button_hall_single
+              - automation.button_hall_hold
+
+      - type: vertical-stack
+        cards:
+          - type: entities
+            title: Motion [Room]
+            entities:
+              - automation.room_motion_night
+              - automation.room_no_motion_night
+
+          - type: entities
+            title: Motion [Kitchen]
+            show_header_toggle: false
+            entities:
+              - automation.kitchen_no_motion_30_min
+
+          - type: entities
+            title: Motion [Hall]
+            show_header_toggle: false
+            entities:
+              - automation.hall_motion_night
+              - automation.hall_no_motion
+              - automation.hall_no_motion_night
+
       - type: entities
-        title: Group Motion Sensors
+        title: Door Sensor
         show_header_toggle: false
         entities:
-          - binary_sensor.no_motion
-          - binary_sensor.no_motion_for_30_minutes
-          - binary_sensor.no_motion_for_an_hour
+          - automation.door_open_lights
+          - automation.door_opened_evening_lights
+          - automation.door_opened_notification
+          - automation.door_closed_notification
+
       - type: entities
-        title: Persistence
+        title: Humidifier
         show_header_toggle: false
         entities:
-          - binary_sensor.someone_is_home
-          - binary_sensor.nobody_is_home
-          - binary_sensor.everyone_is_home
+          - automation.humidifier_auto_on
+          - automation.humidifier_auto_off
+          - automation.humidifier_auto_off_in_the_morning
+          - automation.humidifier_auto_on_after_lunch
