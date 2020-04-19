@@ -1,6 +1,5 @@
 # Uta room button
-- alias: Uta Button [single]
-  initial_state: true
+- alias: Button Uta [single]
   trigger:
     platform: event
     event_type: xiaomi_aqara.click
@@ -12,8 +11,7 @@
       data:
         entity_id: light.room_uta
 
-- alias: Uta Button [double]
-  initial_state: true
+- alias: Button Uta [double]
   trigger:
     platform: event
     event_type: xiaomi_aqara.click
@@ -24,8 +22,7 @@
     - service: light.toggle
       entity_id: light.uta_room_garland
 
-- alias: Uta Button [hold]
-  initial_state: true
+- alias: Button Uta [hold]
   trigger:
     platform: event
     event_type: xiaomi_aqara.click

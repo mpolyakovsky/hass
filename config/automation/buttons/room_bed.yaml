@@ -1,18 +1,4 @@
-# Room button
-- alias: Switch [double click]
-  initial_state: true
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.switch_158d0001837b93
-      click_type: double
-  action:
-    - service: light.toggle
-      entity_id: light.room_garland
-
-- alias: Switch [single click]
-  initial_state: true
+- alias: Button Bed [single]
   trigger:
     platform: event
     event_type: xiaomi_aqara.click
@@ -23,8 +9,18 @@
     - service: light.toggle
       entity_id: light.room_christmas_garlands
 
-- alias: Switch [hold]
-  initial_state: true
+- alias: Button Bed [double]
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.switch_158d0001837b93
+      click_type: double
+  action:
+    - service: light.toggle
+      entity_id: light.room_garland
+
+- alias: Button Bed [hold]
   trigger:
     platform: event
     event_type: xiaomi_aqara.click

@@ -1,6 +1,4 @@
-# ROOM: Motion [night mode]
-- alias: Motion room [night mode]
-  initial_state: true
+- alias: Room - Motion [night]
   trigger:
     platform: state
     entity_id: binary_sensor.motion_sensor_room
@@ -22,9 +20,7 @@
       entity_id: light.hall_night
     - service: script.gateway_night_light
 
-# ROOM: No motion [1 minute]
-- alias: No motion at night room [1 minute]
-  initial_state: true
+- alias: Room - No motion [night]
   trigger:
     platform: state
     entity_id: binary_sensor.motion_sensor_room
@@ -33,16 +29,3 @@
     - service: light.turn_off
       data:
         entity_id: light.gateway_light_34ce008bf588
-
-# HALL: No motion [5 minutes]
-- alias: No motion at night room [5 minutes]
-  initial_state: true
-  trigger:
-    platform: state
-    entity_id: binary_sensor.motion_sensor_room
-    to: 'off'
-    for:
-      minutes: 4
-  action:
-  - service: light.turn_off
-    entity_id: light.hall_night

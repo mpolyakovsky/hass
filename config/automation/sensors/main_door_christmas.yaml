@@ -1,6 +1,5 @@
 # Turn ON christmas lights on open
 - alias: Door opened xmas 16 till 18
-  initial_state: true
   trigger:
     platform: state
     entity_id: binary_sensor.door_window_sensor_158d0001700885
@@ -25,7 +24,6 @@
 
 # Turn ON christmas lights on open
 - alias: Door opened xmas 18 till 21
-  initial_state: true
   trigger:
     platform: state
     entity_id: binary_sensor.door_window_sensor_158d0001700885
@@ -50,7 +48,6 @@
 
 # Turn ON christmas lights on open
 - alias: Door opened xmas 21 till midnight
-  initial_state: true
   trigger:
     platform: state
     entity_id: binary_sensor.door_window_sensor_158d0001700885

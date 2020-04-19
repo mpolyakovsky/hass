@@ -1,6 +1,5 @@
 # Kitchen button
 - alias: Button kitchen [single]
-  initial_state: true
   trigger:
     platform: event
     event_type: xiaomi_aqara.click
@@ -12,7 +11,6 @@
       entity_id: light.kitchen_garlands
 
 - alias: Button kitchen [double]
-  initial_state: true
   trigger:
     platform: event
     event_type: xiaomi_aqara.click
@@ -24,7 +22,6 @@
       entity_id: script.kitchen_romantic
 
 - alias: Button kitchen [hold]
-  initial_state: true
   trigger:
     platform: event
     event_type: xiaomi_aqara.click

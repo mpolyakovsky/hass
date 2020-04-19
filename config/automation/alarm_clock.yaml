@@ -1,6 +1,4 @@
-# Wake up in the morning
-- alias: Wake up
-  initial_state: true
+- alias: Wake up in the morning
   trigger:
     platform: template
     value_template: "{{ states.sensor.time.state == states.sensor.alarm_clock_time.state }}"

@@ -1,6 +1,5 @@
 # Telegram notifications
-- alias: Door opened notify
-  initial_state: true
+- alias: Door opened - notification
   trigger:
     platform: state
     entity_id: binary_sensor.door_window_sensor_158d0001700885
@@ -11,8 +10,7 @@
         title: '*Door sensor*'
         message: "Door opened!"
 
-- alias: Door closed notify
-  initial_state: true
+- alias: Door closed - notification
   trigger:
     platform: state
     entity_id: binary_sensor.door_window_sensor_158d0001700885
@@ -24,8 +22,7 @@
         message: "Door closed!"
 
 # Turn ON hall light on open (only if coming in)
-- alias: Door opened
-  initial_state: true
+- alias: Door open - lights
   trigger:
     platform: state
     entity_id: binary_sensor.door_window_sensor_158d0001700885
@@ -45,8 +42,7 @@
       entity_id: light.hall
 
 # Turn ON kitchen warm led in the evening on door open
-- alias: Door opened in the evening
-  initial_state: true
+- alias: Door opened - evening lights
   trigger:
     platform: state
     entity_id: binary_sensor.door_window_sensor_158d0001700885
@@ -61,7 +57,5 @@
         entity_id: binary_sensor.motion_sensor_158d000155b56e
         state: 'off'
   action:
-    - delay:
-        seconds: 1
     - service: light.turn_on
       entity_id: light.yeelight_plus_strip

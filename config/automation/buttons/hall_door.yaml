@@ -1,6 +1,5 @@
 # Hall button
 - alias: Button hall [single]
-  initial_state: true
   trigger:
     platform: event
     event_type: xiaomi_aqara.click
@@ -12,7 +11,6 @@
       entity_id: light.all_garlands
 
 - alias: Button hall [hold]
-  initial_state: true
   trigger:
     platform: event
     event_type: xiaomi_aqara.click
