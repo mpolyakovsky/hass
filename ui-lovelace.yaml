@@ -1,74 +1,102 @@
 resources:
-  - url: /local/custom_lovelace/xiaomi_vacuum_map_card/xiaomi-vacuum-map-card.js
+  - url: /hacsfiles/lovelace-xiaomi-vacuum-card/xiaomi-vacuum-card.js
+    type: module
+
+  - url: /hacsfiles/simple-thermostat/simple-thermostat.js
+    type: module
+
+  - url: /hacsfiles/lovelace-xiaomi-vacuum-map-card/xiaomi-vacuum-map-card.js
+    type: module
+
+  - url: /hacsfiles/vertical-stack-in-card/vertical-stack-in-card.js
+    type: module
+
+  - url: /hacsfiles/lovelace-layout-card/layout-card.js
     type: module
 
 title: Home
 views:
   - title: Room
     icon: mdi:home
-    badges:
-      - person.mike
-      - person.lena
-      - person.utah
-      - sensor.room_temperature
-      - sensor.room_humidity
-      - sensor.illumination_34ce008bf588
-      - binary_sensor.motion_sensor_room
+    panel: true
     cards:
-      - type: vertical-stack
+      - type: custom:layout-card
         cards:
+          - type: custom:vertical-stack-in-card
+            cards:
+              - type: picture-glance
+                title: Alarm Clock
+                entities:
+                  - input_datetime.alarm_clock
+                  - input_boolean.alarm_clock_status
+                image: /local/alarm_clock.jpg
+              - type: entities
+                show_header_toggle: false
+                entities:
+                  - input_datetime.alarm_clock
+                  - input_boolean.alarm_clock_status
+
+          - type: custom:vertical-stack-in-card
+            cards:
+              - type: picture
+                image: /local/ac-on.png
+              - type: custom:simple-thermostat
+                entity: climate.mitsubishi_ac
+                name: false
+                control:
+                  hvac:
+                    heat: false
+
+          - type: custom:vertical-stack-in-card
+            cards:
+              - type: picture-entity
+                entity: switch.bw_humidifier
+                tap_action:
+                  action: toggle
+                state_image:
+                  "on": /local/humidifier-on.jpg
+                  "off": /local/humidifier-off.jpg
+              - type: entities
+                entities:
+                  - entity: automation.humidifier_auto_on
+                    name: Auto mode
+                  - entity: sensor.room_humidity
+                  - entity: sensor.bw_humidifier_wattage
+                    name: Wattage
+
           - type: entities
-            title: Lights
-            show_header_toggle: true
-            entities:
-              - light.room
-              - light.uta_table_lamp
-              - light.uta_room_lamp
-              - light.gateway_light_34ce008bf588
-          - type: entities
-            title: Garlands
-            show_header_toggle: true
-            entities:
-            - light.room_garland
-#            - light.bed_garland
-            - light.window_garland
-            - light.uta_room_garland
-      - type: vertical-stack
-        cards:
-          - type: picture-glance
-            title: Alarm Clock
-            entities:
-              - input_datetime.alarm_clock
-              - input_boolean.alarm_clock_status
-            image: /local/alarm_clock.jpg
-          - type: entities
+            title: Sensors
             show_header_toggle: false
             entities:
-            - input_datetime.alarm_clock
-            - input_boolean.alarm_clock_status
-      - type: thermostat
-        entity: climate.mitsubishi_ac
-      - type: vertical-stack
-        cards:
-        - type: picture-entity
-          entity: switch.bw_humidifier
-          tap_action:
-            action: toggle
-          state_image:
-            "on": /local/humidifier-on.jpg
-            "off": /local/humidifier-off.jpg
-        - type: conditional
-          conditions:
-            - entity: switch.bw_humidifier
-              state: "on"
-          card:
-            type: entities
-            entities:
-            - entity: sensor.bw_humidifier_wattage
-              name: Wattage
-        - type: entities
-          entities:
-            - automation.humidifier_auto_on
+              - entity: binary_sensor.motion_sensor_room
+                secondary_info: last-changed
+              - entity: sensor.illumination_34ce008bf588
+                secondary_info: last-changed
+              - entity: sensor.room_humidity
+#            footer:
+#              type: graph
+#              entity: sensor.room_humidity
+#              hours_to_show: 24
+#              detail: 1
+
+          - type: vertical-stack
+            cards:
+              - type: entities
+                title: Lights
+                show_header_toggle: true
+                entities:
+                  - light.room
+                  - light.uta_table_lamp
+                  - light.uta_room_lamp
+                  - light.gateway_light_34ce008bf588
+
+              - type: entities
+                title: Garlands
+                show_header_toggle: true
+                entities:
+                  - light.room_garland
+#                  - light.window_garland
+                  - light.uta_room_garland
 
   - title: Kitchen
     cards:
@@ -82,6 +110,12 @@ views:
                 secondary_info: last-changed
               - entity: sensor.motion_sensor_kitchen
                 secondary_info: last-changed
+#            footer:
+#              type: graph
+#              entity: sensor.motion_sensor_kitchen
+#              hours_to_show: 24
+#              detail: 1
+
           - type: conditional
             conditions:
               - entity: media_player.googlehome2365
@@ -118,16 +152,14 @@ views:
               - light.yeelight_plus_strip
               - light.kitchen_candles
               - light.balcony
+            footer:
+              type: buttons
+              entities:
+                - entity: script.kitchen_romantic
+                  icon: mdi:heart-multiple
 
           - type: horizontal-stack
             cards:
-              - type: picture
-                image: /local/romantic_mode.jpg
-                tap_action:
-                  action: call-service
-                  service: script.turn_on
-                  service_data:
-                    entity_id: script.kitchen_romantic
               - type: picture-entity
                 entity: light.kitchen_candles
                 tap_action:
@@ -154,8 +186,13 @@ views:
         entities:
           - light.hall
           - light.hall_night
-      - type: vertical-stack
+          - light.wc_night
+      - type: custom:vertical-stack-in-card
         cards:
+          - type: custom:xiaomi-vacuum-card
+            entity: vacuum.xiaomi_mi_robot
+            name: false
+            labels: false
           - type: picture-entity
             entity: vacuum.xiaomi_mi_robot
             tap_action:
@@ -194,27 +231,23 @@ views:
 
   - title: Climate
     icon: mdi:weather-sunny
-    badges:
-      - sensor.sunrise_time
-      - sensor.sunset_time
-      - sun.sun
-      - sensor.yr_symbol
+    panel: true
     cards:
       - type: vertical-stack
         cards:
           - type: weather-forecast
             entity: weather.dark_sky
-      - type: vertical-stack
-        cards:
-          - type: sensor
-            entity: sensor.broadlink_sensor_humidity
-            hours_to_show: 24
-            graph: line
-          - type: sensor
-            entity: sensor.room_temperature
-            hours_to_show: 24
-            graph: line
-            name: Temperature
+          - type: horizontal-stack
+            cards:
+              - type: sensor
+                entity: sensor.broadlink_sensor_humidity
+                hours_to_show: 24
+                graph: line
+              - type: sensor
+                entity: sensor.room_temperature
+                hours_to_show: 24
+                graph: line
+                name: Temperature
 
   - title: Devices
     icon: mdi:tablet
@@ -237,6 +270,11 @@ views:
             format: relative
           - entity: sensor.next_to_metro
             format: relative
+      - type: entities
+        entities:
+          - person.mike
+          - person.lena
+          - person.utah
       - type: entities
         title: Group Motion Sensors
         show_header_toggle: false
@@ -313,6 +351,12 @@ views:
             entity: sensor.time_online
           - type: entities
             entities:
+              - entity: sensor.sunrise_time
+                icon: mdi:weather-sunset-up
+              - entity: sensor.sunset_time
+                icon: mdi:weather-sunset-down
+          - type: entities
+            entities:
             - sensor.switch_battery_level
             - sensor.button_uta_battery_level
             - sensor.door_sensor_battery_level
@@ -325,30 +369,34 @@ views:
 #            - sensor.motion_sensor_wardrobe_battery_level
 
   - title: Settings
-    icon: mdi:gear
+    icon: mdi:cogs
     cards:
       - type: vertical-stack
         cards:
           - type: entities
             title: Kitchen button
+            icon: mdi:radiobox-blank
             entities:
               - automation.button_kitchen_single
               - automation.button_kitchen_double
               - automation.button_kitchen_hold
           - type: entities
             title: Bed button
+            icon: mdi:radiobox-blank
             entities:
               - automation.button_bed_single
               - automation.button_bed_double
               - automation.button_bed_hold
           - type: entities
             title: Uta button
+            icon: mdi:radiobox-blank
             entities:
               - automation.button_uta_single
               - automation.button_uta_double
               - automation.button_uta_hold
           - type: entities
             title: Hall button
+            icon: mdi:radiobox-blank
             entities:
               - automation.button_hall_single
               - automation.button_hall_hold
@@ -357,18 +405,21 @@ views:
         cards:
           - type: entities
             title: Motion [Room]
+            icon: mdi:motion-sensor
             entities:
               - automation.room_motion_night
               - automation.room_no_motion_night
 
           - type: entities
             title: Motion [Kitchen]
+            icon: mdi:motion-sensor
             show_header_toggle: false
             entities:
               - automation.kitchen_no_motion_30_min
 
           - type: entities
             title: Motion [Hall]
+            icon: mdi:motion-sensor
             show_header_toggle: false
             entities:
               - automation.hall_motion_night
@@ -377,6 +428,7 @@ views:
 
       - type: entities
         title: Door Sensor
+        icon: mdi:door
         show_header_toggle: false
         entities:
           - automation.door_open_lights
@@ -386,6 +438,7 @@ views:
 
       - type: entities
         title: Humidifier
+        icon: mdi:water-percent
         show_header_toggle: false
         entities:
           - automation.humidifier_auto_on

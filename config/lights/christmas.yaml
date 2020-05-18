@@ -16,9 +16,9 @@
   entity_id: switch.uta_garland
 
 # esphome | http://192.168.0.57
-- platform: switch
-  name: Christmas Tree
-  entity_id: switch.sonoff_christmas_tree
+#- platform: switch
+#  name: Christmas Tree
+#  entity_id: switch.sonoff_christmas_tree
 
 # esphome http://192.168.0.52
 - platform: switch
@@ -55,7 +55,7 @@
   name: Room Garlands
   entities:
     - light.room_garland
-    - light.window_garland
+#    - light.window_garland
 #    - light.bed_garland
 #    - light.christmas_tree
 

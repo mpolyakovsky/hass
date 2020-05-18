@@ -58,11 +58,8 @@ gateway_wakeup_light:
       entity_id: light.gateway_light_34ce008bf588
       brightness: 255
 
-# ROMANTIC mode in kitchen
 kitchen_romantic:
   alias: Romantic (kitchen)
   sequence:
-    - service: light.turn_off
-      entity_id: light.kitchen_romantic_off
-    - service: light.turn_on
-      entity_id: light.kitchen_romantic_on
+    - service: scene.turn_on
+      entity_id: scene.kitchen_romantic

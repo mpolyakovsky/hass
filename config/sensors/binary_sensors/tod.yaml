@@ -7,9 +7,7 @@
 - platform: tod
   name: dark time
   after: sunset
-  after_offset: '00:30'
   before: sunrise
-  before_offset: '-00:00'
 
 - platform: tod
   name: time to sleep

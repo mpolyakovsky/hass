@@ -37,7 +37,7 @@ light.uta_room_lamp:
   icon: mdi:track-light
 light.uta_room_garland:
   friendly_name: Garland Uta
-  icon: mdi:spotlight-beam
+  icon: mdi:string-lights
 light.table_lamp:
   icon: mdi:lightbulb-outline
 light.room:
@@ -48,7 +48,7 @@ light.hall_night:
 light.hall:
   icon: mdi:ceiling-light
 light.kitchen_garland:
-  icon: mdi:spotlight-beam
+  icon: mdi:string-lights
 light.kitchen_candles:
   friendly_name: Candles
   icon: mdi:candle
